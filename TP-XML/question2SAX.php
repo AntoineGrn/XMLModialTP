@@ -3,12 +3,14 @@ include_once('Sax4PHP.php');
 header("Content-type: application/xml");
 
 class Question2SAX extends DefaultHandler{
-private $capitale = '';
-private $name = '';
-private $asia = 0;
-private $autre = 0;
-private $capitaleName = '';
-private $cityBool = false;
+    function __construct() {
+        parent::__construct();
+        $this->city = false;
+        $this->country = false;
+        $this->pays = false;
+        $this->result = '';
+    }
+
     //initialisation du document
     function startDocument() {
         //entete du document xml resultant
@@ -29,23 +31,42 @@ private $cityBool = false;
     }
 
     function startElement($nom, $attr){
+        $this->texte = "";
         if ($nom == 'country') {
-            $this->capitale = $attr['capital'];
-        } else if ($nom == 'city' && $attr['id'] == $this->capitale) {
-            $this->$cityBool = false;
-        } else if ($nom == 'name' && $this->cityBool) {
-            $this->capitaleName = $this->texte;
-            $this->cityBool = false;
-        } else if ($nom == 'encompassed' && $attr['percentage'] < 100 && $attr['continent'] == 'asia') {
-            $this->asia = $attr['percentage'];
-            $this->autre = 100 - $this->asia;
+            $this->country = true;
+            $this->result = "<pays ";
+        } else if ($nom == 'city' && $attr['is_country_cap'] == 'yes') {;
+            $this->city = true;
+        } else if ($nom == 'encompassed' && $attr['continent'] == "asia" && $attr['percentage'] < 100) {
+            $this->pays = true;
+            $this->result .= "proportion-asie='".$attr['percentage']."' ";
+            $percent = 100 - $att['percentage'];
+            $this->result .= "proportion-autre='".$percent."' ";
         }
-        echo '<pays nom="'.$this->name.'" capitale="'.$this->capitale.'" proportion-asie="'.$this->asia.'" proportion-autres="'.$this->autre.'" />';
     }
 
-    function endElement(){
+    function endElement($nom){
+        if ($nom == 'country') {
+            $this->result .= "/>";
+            $this->country = false;
+            if($this->pays) {
+                echo $this->result."\n";
+            }
+            $this->pays = false;
+            $this->result = "";
+        } else if ($nom == 'name') {
+            if($this->country) {
+                $this->result .= "nom='".$this->texte."' ";
+                $this->country = false;
+            } else if($this->city) {
+                $this->result .= "capitale='".$this->texte."'";
+                $this->city = false;
+            }
+        }
+         else if ($nom == 'city') {
+            $this->city = false;
+        }
     }
-
 }
 
 $xml = file_get_contents('mondial/mondial.xml');
