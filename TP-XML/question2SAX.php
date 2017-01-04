@@ -40,7 +40,7 @@ class Question2SAX extends DefaultHandler{
         } else if ($nom == 'encompassed' && $attr['continent'] == "asia" && $attr['percentage'] < 100) {
             $this->pays = true;
             $this->result .= "proportion-asie='".$attr['percentage']."' ";
-            $percent = 100 - $att['percentage'];
+            $percent = 100 - $attr['percentage'];
             $this->result .= "proportion-autre='".$percent."' ";
         }
     }
