@@ -14,6 +14,9 @@ $documentXml->load("mondial.xml");
 
 //Création d'un nouveau document pour le fichier de sortie
 $newDom = new DOMDocument();
+$newDom->validateOnParse = true;
+$newDom->preserveWhiteSpace=false;
+$newDom->formatOutput = true;
 //Element racine
 $racine = $newDom->createElement('liste-pays');
 //On récupère tous les pays contenu dans le fichier mondial.xml

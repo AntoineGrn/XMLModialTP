@@ -8,20 +8,29 @@ class Question2SAX extends DefaultHandler{
         $this->city = false;
         $this->country = false;
         $this->pays = false;
+
         $this->result = '';
+        $this->fileXml = '';
+        $this->documentXml = '';
+        $this->element = '';
     }
 
     //initialisation du document
     function startDocument() {
         //entete du document xml resultant
-        echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
-        echo "<!DOCTYPE liste-pays SYSTEM 'mondial.dtd'>\n";
-        echo "<liste-pays>\n";
+        $this->documentXml = new DOMImplementation;
+        $dtd = $this->documentXml->createDocumentType('liste-pays', '', 'liste-pays.dtd');
+        $this->fileXml = $this->documentXml->createDocument("", "", $dtd);
+        $this->fileXml->validateOnParse = true;
+        $this->fileXml->preserveWhiteSpace=false;
+        $this->fileXml->formatOutput = true;
+        $this->result = $this->fileXml->createElement('liste-pays');
+        $this->fileXml->appendChild($this->result);
     }
 
     //fin du document
     function endDocument() {
-        echo "</liste-pays>\n";
+        echo $this->fileXml->saveXML();
     }
 
     //lecture d'un noeud texte
@@ -34,32 +43,39 @@ class Question2SAX extends DefaultHandler{
         $this->texte = "";
         if ($nom == 'country') {
             $this->country = true;
-            $this->result = "<pays ";
+            $this->element = $this->fileXml->createElement('pays');
         } else if ($nom == 'city' && $attr['is_country_cap'] == 'yes') {;
             $this->city = true;
         } else if ($nom == 'encompassed' && $attr['continent'] == "asia" && $attr['percentage'] < 100) {
             $this->pays = true;
-            $this->result .= "proportion-asie='".$attr['percentage']."' ";
-            $percent = 100 - $attr['percentage'];
-            $this->result .= "proportion-autre='".$percent."' ";
+
+            $asiaPercentage = $this->fileXml->createAttribute('proportion-asie');
+            $asiaPercentage->value = $attr['percentage'];
+            $this->element->appendChild($asiaPercentage);
+
+            $otherPercentage = $this->fileXml->createAttribute('proportion-autres');
+            $otherPercentage->value = 100 - $attr['percentage'];
+            $this->element->appendChild($otherPercentage);
         }
     }
 
     function endElement($nom){
         if ($nom == 'country') {
-            $this->result .= "/>";
             $this->country = false;
             if($this->pays) {
-                echo $this->result."\n";
+                $this->result->appendChild($this->element);
             }
             $this->pays = false;
-            $this->result = "";
         } else if ($nom == 'name') {
             if($this->country) {
-                $this->result .= "nom='".$this->texte."' ";
+                $nomElement = $this->fileXml->createAttribute('nom');
+                $nomElement->value = $this->texte;
+                $this->element->appendChild($nomElement);
                 $this->country = false;
             } else if($this->city) {
-                $this->result .= "capitale='".$this->texte."'";
+                $capitalElement = $this->fileXml->createAttribute('capitale');
+                $capitalElement->value = $this->texte;
+                $this->element->appendChild($capitalElement);
                 $this->city = false;
             }
         }
