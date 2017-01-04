@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="607bcfe2-a839-4e57-adfc-f770b0ff4df3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TP-XML/mondial/question2DOMXpath.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TP-XML/question2SAX.php" afterPath="$PROJECT_DIR$/TP-XML/question2SAX.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TP-XML/mondial/question2DOMXpath.php" afterPath="$PROJECT_DIR$/TP-XML/mondial/question2DOMXpath.php" />
     </list>
     <ignored path="XMLModialTP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/TP-XML/question2DOM.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -39,8 +37,8 @@
       <file leaf-file-name="question2SAX.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TP-XML/question2SAX.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+            <state relative-caret-position="44">
+              <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -49,8 +47,8 @@
       <file leaf-file-name="mondial.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TP-XML/mondial/mondial.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="3756" column="20" selection-start-line="3756" selection-start-column="9" selection-end-line="3756" selection-end-column="20" />
+            <state relative-caret-position="322">
+              <caret line="4341" column="31" selection-start-line="4341" selection-start-column="31" selection-end-line="4341" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -59,11 +57,21 @@
       <file leaf-file-name="question2DOMXpath.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TP-XML/mondial/question2DOMXpath.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            <state relative-caret-position="255">
+              <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
               <folding>
-                <marker date="1483524822105" expanded="true" signature="956:981" ph="..." />
+                <marker date="1483527914864" expanded="true" signature="1415:1440" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TP-XML/profile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -81,9 +89,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TP-XML/question2SAX.php" />
         <option value="$PROJECT_DIR$/TP-XML/question2DOMXpath.php" />
         <option value="$PROJECT_DIR$/TP-XML/mondial/question2DOMXpath.php" />
+        <option value="$PROJECT_DIR$/TP-XML/question2SAX.php" />
       </list>
     </option>
   </component>
@@ -633,12 +641,12 @@
       <option name="presentableId" value="Default" />
       <updated>1483515072993</updated>
       <workItem from="1483515074321" duration="791000" />
-      <workItem from="1483515943253" duration="7117000" />
+      <workItem from="1483515943253" duration="8544000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7908000" />
+    <option name="totallyTimeSpent" value="9335000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -706,33 +714,41 @@
     <entry file="file://$PROJECT_DIR$/TP-XML/question2DOM.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TP-XML/question2SAX.php">
+    <entry file="file://$PROJECT_DIR$/TP-XML/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+        <state relative-caret-position="333">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TP-XML/mondial/mondial.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="3756" column="20" selection-start-line="3756" selection-start-column="9" selection-end-line="3756" selection-end-column="20" />
+        <state relative-caret-position="322">
+          <caret line="4341" column="31" selection-start-line="4341" selection-start-column="31" selection-end-line="4341" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TP-XML/question2SAX.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TP-XML/mondial/question2DOMXpath.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+        <state relative-caret-position="255">
+          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
           <folding>
-            <marker date="1483524822105" expanded="true" signature="956:981" ph="..." />
+            <marker date="1483527914864" expanded="true" signature="1415:1440" ph="..." />
           </folding>
         </state>
       </provider>
