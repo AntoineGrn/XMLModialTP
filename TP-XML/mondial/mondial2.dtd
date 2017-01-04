@@ -1,5 +1,5 @@
 <!-- XML DTD "mondial.dtd":
-  (Wolfgang May, may@informatik.uni-freiburg.de, March 2000, revised April 2009)
+  (Wolfgang May, may@informatik.uni-freiburg.de, March 2000)
   a hierarchical DTD for the MONDIAL database,
   containing e.g.,
   - scalar reference attributes (city/capital)
@@ -11,13 +11,13 @@
     (river/to, references rivers, lakes, and seas) -->
 
 <!ELEMENT mondial (country*,continent*,organization*,
-                   sea*,river*,lake*,island*,mountain*,desert*)> 
+                   mountain*,(sea*,river*,lake*,desert*,island*)*)> 
 <!ELEMENT country (name,population?,
                    population_growth?,infant_mortality?,
-                   gdp_total?,gdp_agri?,gdp_ind?,gdp_serv?,inflation?,
-                   (indep_date|dependent)?,government?,encompassed*,
+                   gdp_total?,gdp_agri?,gdp_ind?,gdp_serv?,
+                   inflation?,indep_date?,government?,encompassed*,
                    ethnicgroups*,religions*,languages*,border*,
-                   (province+|city+))>
+                   province*,city*)>
 <!ATTLIST country car_code ID #IMPLIED
                   area CDATA #IMPLIED
                   capital IDREF #IMPLIED
@@ -26,7 +26,7 @@
 <!ELEMENT area (#PCDATA)>
 <!ELEMENT population (#PCDATA)>
 <!-- note that population is also a subelement of city -->
-  <!ATTLIST population year CDATA #IMPLIED>
+<!ATTLIST population year CDATA #IMPLIED>
 <!ELEMENT population_growth (#PCDATA)>
 <!ELEMENT infant_mortality (#PCDATA)>
 <!ELEMENT gdp_total (#PCDATA)>
@@ -35,8 +35,6 @@
 <!ELEMENT gdp_serv (#PCDATA)>
 <!ELEMENT inflation (#PCDATA)>
 <!ELEMENT indep_date (#PCDATA)>
-<!ELEMENT dependent EMPTY>
-  <!ATTLIST dependent country IDREF #REQUIRED>
 <!ELEMENT government (#PCDATA)>
 <!ELEMENT encompassed EMPTY>
 <!ATTLIST encompassed continent IDREF #REQUIRED
@@ -56,8 +54,8 @@
                    country IDREF #REQUIRED
                    capital IDREF #IMPLIED>
 
-<!ELEMENT city (name,longitude?,latitude?,population*,
-                located_at*,located_on*)>
+<!ELEMENT city (name,longitude?,latitude?,
+                population*,located_at*)>
 <!ATTLIST city id ID #REQUIRED
                is_country_cap CDATA #IMPLIED
                is_state_cap CDATA #IMPLIED
@@ -70,8 +68,6 @@
                      river IDREFS #IMPLIED
                      sea IDREFS #IMPLIED
                      lake IDREFS #IMPLIED>
-<!ELEMENT located_on EMPTY>
-<!ATTLIST located_on island IDREF #REQUIRED>
 
 <!ELEMENT organization (name,abbrev,established?,members*)>
 <!ATTLIST organization id ID #REQUIRED
@@ -85,34 +81,11 @@
 <!ELEMENT continent (name,area)>
 <!ATTLIST continent id ID #REQUIRED>
 
-<!-- just as a pattern that is never used -->
-<!ELEMENT geo (name,islands?,mountains?,located*,to*,from?,
-               area?,length?,height?,altitude?,depth?,
-               longitude?,latitude?,
-               source?,estuary?)>
-<!ATTLIST geo id ID #REQUIRED
-              country IDREFS #IMPLIED
-              type NMTOKEN #IMPLIED
-              sea IDREFS #IMPLIED
-              island IDREF #IMPLIED
-              bordering IDREFS #IMPLIED>
-<!ELEMENT source (mountains?,located*,from?,altitude?,longitude?,latitude?)>
-<!ATTLIST source country IDREFS #REQUIRED>
-<!ELEMENT estuary (located*,longitude?,latitude?)>
-<!ATTLIST estuary country IDREFS #REQUIRED>
-<!ELEMENT length (#PCDATA)>
-<!ELEMENT height (#PCDATA)>
-<!ELEMENT altitude (#PCDATA)>
-<!ELEMENT depth (#PCDATA)>
-
-<!ELEMENT river (name,located*,to*,area?,length?,source?,estuary?)>
+<!ELEMENT river (to*,located*,length?,name)>
 <!ATTLIST river id ID #REQUIRED
-                country IDREFS #REQUIRED>
+                country IDREFS #IMPLIED>
 
-<!ELEMENT from EMPTY>
-<!ATTLIST from watertype (river|sea|lake) #REQUIRED
-             water IDREFS #REQUIRED>
-
+<!ELEMENT length (#PCDATA)>
 <!ELEMENT to EMPTY>
 <!ATTLIST to watertype (river|sea|lake) #REQUIRED
              water IDREF #REQUIRED>
@@ -121,34 +94,27 @@
 <!ATTLIST located country IDREF #REQUIRED
                   province IDREFS #IMPLIED>
 
-<!ELEMENT lake (name,located*,to*,area?,altitude?,depth?,longitude?,latitude?)>
+<!ELEMENT lake (located*,name,area?,depth?)>
 <!ATTLIST lake id ID #REQUIRED
-               country IDREFS #REQUIRED
-               island IDREF #IMPLIED
-               type (salt|acid|artificial|caldera|crater|impact) #IMPLIED>
+               country IDREFS #IMPLIED>
+<!ELEMENT depth (#PCDATA)>
 
-<!ELEMENT sea (name,located*,area?,depth?)>
+<!ELEMENT sea (located*,name,area?,depth?,bordering*)>
 <!ATTLIST sea id ID #REQUIRED
-              country IDREFS #REQUIRED
+              country IDREFS #IMPLIED
               bordering IDREFS #IMPLIED>
 
-<!ELEMENT desert (name,located*,area?,longitude?,latitude?)>
+<!ELEMENT desert (located*,name,area?)>
 <!ATTLIST desert id ID #REQUIRED
-                 country IDREFS #REQUIRED
-                 type (sand|rocks|lime|ice) #IMPLIED>
+                 country IDREFS #IMPLIED>
 
-<!ELEMENT island (name,islands?,located*,area?,height?,longitude?,latitude?)>
+<!ELEMENT island (located*,name,area?,longitude?,latitude?)>
 <!ATTLIST island id ID #REQUIRED
-                 sea IDREFS #IMPLIED
-                 lake IDREF #IMPLIED
-                 country IDREFS #REQUIRED
-                 type (volcanic|coral|atoll|lime) #IMPLIED>
-<!ELEMENT islands (#PCDATA)>
+                 country IDREFS #IMPLIED>
 
-<!ELEMENT mountain (name,mountains?,located*,height?,longitude?,latitude?)>
+<!ELEMENT mountain (located*,name,longitude?,latitude?,height?)>
 <!ATTLIST mountain id ID #REQUIRED
-                   country IDREFS #REQUIRED
-                   island IDREF #IMPLIED
-                   type (volcanic|volcano|monolith|granite) #IMPLIED>
-<!ELEMENT mountains (#PCDATA)>
+                   country IDREFS #IMPLIED>
+<!ELEMENT height (#PCDATA)>
 
+<!ELEMENT bordering (#PCDATA)>
