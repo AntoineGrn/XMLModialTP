@@ -1,7 +1,6 @@
 <?php
-echo 'coucou';
    $xslDoc = new DOMDocument();
-   $xslDoc->load("question1.xsl");
+   $xslDoc->load("question1v1.xsl");
 
    $xmlDoc = new DOMDocument();
    $xmlDoc->load("mondial/mondial.xml");
