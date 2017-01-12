@@ -7,6 +7,9 @@ $writer->openMemory();
 
 // Ouverture du flux
 $reader->open("mondial.xml");
+$city = false;
+$country = false;
+$pays = false;
 //$reader->setParserProperty(XMLReader::VALIDATE, true);
 
 $writer->setIndent(true);
@@ -16,17 +19,34 @@ $writer->startElement("liste-pays");
 
 // Parcours de l'arbre
 while($reader->read()) {
-    if (($reader->nodeType === XMLReader::ELEMENT) && ($reader->name === 'livre')) {// <livre ..>
-        $annee = $reader->getAttribute('annee');
-    } else if (($reader->nodeType === XMLReader::ELEMENT) && ($reader->name === 'titre')) {// <titre>
-        $titre = $reader->readString();
-    } else if (($reader->nodeType === XMLReader::END_ELEMENT) && ($reader->name === 'livre')) {// </livre>
-        if ($annee >= 1960) {
-            $writer->startElement('livre');
-            $writer->writeAttribute('annee',$annee);
-            $writer->writeAttribute('titre',$titre);
+    if (($reader->nodeType === XMLReader::ELEMENT) && ($reader->name === 'country')) {
+        $country = true;
+    } else if (($reader->nodeType === XMLReader::ELEMENT) && ($reader->name === 'city' && $reader->getAttribute('is_country_cap') == 'yes')) {
+        $city = true;
+    } else if (($reader->nodeType === XMLReader::ELEMENT) && ($reader->name === 'encompassed' && $reader->getAttribute('continent') == "asia" && $reader->getAttribute('percentage') < 100)) {
+        $pays = true;
+        $asiaPercentage = $reader->getAttribute('percentage');
+        $autre = 100 - $asiaPercentage;
+    } else if (($reader->nodeType === XMLReader::ELEMENT) && ($reader->name === 'name')) {
+        if($country) {
+            $nomCountry = $reader->readString();
+            $country = false;
+        } else if($city) {
+            $capitalName = $reader->readString();
+            $city = false;
+        }
+    } else if (($reader->nodeType === XMLReader::END_ELEMENT) && ($reader->name === 'country')) {
+        if ($pays) {
+            $writer->startElement('pays');
+            $writer->writeAttribute('nom',$nomCountry);
+            $writer->writeAttribute('capitale',$capitalName);
+            $writer->writeAttribute('proportion-asia',$asiaPercentage);
+            $writer->writeAttribute('proportion-autres',$autre);
             $writer->endElement();
         }
+        $country = false;
+        $city = false;
+        $pays = false;
     }
 }
 
