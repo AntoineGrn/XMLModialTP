@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by lloison on 12/01/2017.
  */
-public class Main {
+public class Question4JDOM {
     static Document document;
     static Element racine;
 
