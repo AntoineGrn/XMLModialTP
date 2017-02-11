@@ -1,14 +1,10 @@
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
-
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by lloison on 12/01/2017.
- */
 public class Question4JDOM {
     static Document document;
     static Element racine;
@@ -34,7 +30,8 @@ public class Question4JDOM {
             List listeencompassed = countryCourant.getChildren("encompassed");
             for (Object encompassed: listeencompassed) {
                 Element encompassedElem = (Element) encompassed;
-                if ("asia".equals(encompassedElem.getAttributeValue("continent")) && Integer.parseInt(encompassedElem.getAttributeValue("percentage")) < 100) {
+                if ("asia".equals(encompassedElem.getAttributeValue("continent")) &&
+                Integer.parseInt(encompassedElem.getAttributeValue("percentage")) < 100) {
                     String nomPays = countryCourant.getChild("name").getValue();
                     int percentageAsia = Integer.parseInt(encompassedElem.getAttributeValue("percentage"));
                     int percentageOther = (100 - percentageAsia);
@@ -58,14 +55,13 @@ public class Question4JDOM {
                             }
                         }
                     }
-                    System.out.println("<pays nom=\"" + nomPays + "\" capitale=\"" + nomCapitale + "\" proportion-asie=\"" + percentageAsia + "\" proportion-autres=\"" + percentageOther + "\"></pays>");
+                    System.out.println("<pays nom=\"" + nomPays + "\" capitale=\"" + nomCapitale
+                    + "\" proportion-asie=\"" + percentageAsia + "\" proportion-autres=\"" + percentageOther + "\"></pays>");
                 }
             }
         }
         System.out.println("</liste-pays>");
     }
-
-
 
     public static void main(String[] args)
     {
@@ -76,7 +72,5 @@ public class Question4JDOM {
             getListePays();
         }
         catch(Exception e){}
-
-
     }
 }
